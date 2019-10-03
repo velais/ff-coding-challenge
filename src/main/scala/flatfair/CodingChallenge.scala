@@ -4,14 +4,17 @@ import scala.annotation.tailrec
 
 object CodingChallenge {
 
-  val minMembershipFee = 120 * 100
-  val minRentPerWeek = 25 * 100
-  val maxRentPerWeek = 2000 * 100
+  val minMembershipFee: Int = 120 * 100
+  val minRentPerWeek: Int = 25 * 100
+  val maxRentPerWeek: Int = 2000 * 100
   val VAT = 0.2
 
   /**
     * Calculates membership fee for a given rent/period and branch.
     *
+    * @param rentAmount In pence
+    * @param rentPeriod ["week", "month"]
+    * @param organisationUnit Must have .kind of OrganisationalUnit.Branch
     * @throws IllegalArgumentException Validates rent, period and organisationUnit.kind
     * @return Membership fee
     */
@@ -25,9 +28,9 @@ object CodingChallenge {
       s"organisationUnit has kind: ${organisationUnit.kind}, must have kind: Branch")
 
     getFixedFee(organisationUnit) match {
-      case Some(fee)                           => fee
-      case _  if weeklyRent < minMembershipFee => minMembershipFee + VATFor(minMembershipFee, VAT)
-      case _                                   => weeklyRent + VATFor(weeklyRent, VAT)
+      case Some(fee)                          => fee
+      case _ if weeklyRent < minMembershipFee => minMembershipFee + VATFor(minMembershipFee, VAT)
+      case _                                  => weeklyRent + VATFor(weeklyRent, VAT)
     }
   }
 
