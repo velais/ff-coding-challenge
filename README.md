@@ -11,9 +11,12 @@ sbt test
 
 ### Future considerations
 
-- Have the model represent parent -> child relationship not just child -> parent, would allow for easier traversal for other uses.
+- Have the model represent parent->child relationship not just child->parent, would allow for easier traversal for other uses.
 - Move constant values to a config or pull from a database to allow easier control.
+- Change type of rentPeriod from String to Period.Value, push conversion further up.
+- Don't throw exceptions for validation errors, use something like cats validation: https://typelevel.org/cats/datatypes/validated.html
 - Expand OrganisationUnit to allow for type safety and differences in the OrgUnit types.
+
 ```scala
 // Something like this
 sealed trait OrganisationalUnit {
